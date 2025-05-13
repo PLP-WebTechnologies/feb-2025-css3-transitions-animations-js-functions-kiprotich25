@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s, color 0.5s;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #008CBA;
+      color: white;
+      border-radius: 8px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005f6a;
+    }
+
+    @keyframes bounce {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    .bounce {
+      animation: bounce 0.5s;
+    }
+
+    .dark-theme {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    .dark-theme button {
+      background-color: #444;
+    }
+    .ball {
+  width: 100px;
+  height: 100px;
+  background-color: #f1c40f;
+  border-radius: 50%;
+  position: relative;
+  animation: bounce 2s ease infinite;
+}
+.ball p{
+  padding-top: 40%;
+  color: blue;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-50px);
+  }
+}
+#movingBox {
+  width: 100px;
+  height: 100px;
+  background-color: #a5ca22;
+  animation: slide 5s linear infinite;
+}
+#movingBox p{
+  padding-top: 40%;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(300px); }
+}
+  </style>
+</head>
+<body>
+  <div class="container" >
+    <h1>Week 7</h1>
+    <button id="animateBtn">Click to jump!</button>
+    <button id="themeToggle">Toggle Theme</button>
+     <div class="ball"><p>Don't quit</p></div>
+     <div id="movingBox"><p>Keep going like this box</p></div>
+  </div>
+
+  <script>
+    
+    document.getElementById('animateBtn').addEventListener('click', function () {
+      this.classList.add('bounce');
+      setTimeout(() => this.classList.remove('bounce'), 500);
+    });
+
+    // Theme toggle and localStorage
+    const body = document.body;
+    const themeBtn = document.getElementById('themeToggle');
+
+    // Apply stored theme on page load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-theme');
+    }
+
+    // Toggle and store theme preference
+    themeBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+      localStorage.setItem('theme', currentTheme);
+    });
+    
+  </script>
+</body>
+</html>
